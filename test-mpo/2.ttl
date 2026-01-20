@@ -7,7 +7,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix brol: <https://example.org/brol#> .
 
-@base <open-science.vliz.be/LDES/test-mpo/2.ttl> .
+@base <https://open-science.vliz.be/LDES/test-mpo/2.ttl> .
 
 <>
     a tree:Node ;
