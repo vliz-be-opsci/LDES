@@ -1,0 +1,82 @@
+
+@prefix tree: <https://w3id.org/tree#> .
+@prefix ldes: <https://w3id.org/ldes#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix brol: <https://example.org/brol#> .
+
+@base <open-science.vliz.be/LDES/test-mpo/2.ttl> .
+
+<>
+    a tree:Node ;
+    
+    ldes:retentionPolicy [
+        a ldes:RetentionPolicy ;
+        ldes:versionAmount 100
+    ] .
+
+<feed>
+  a ldes:EventStream ;
+  ldes:timestampPath brol:hiere ;
+  ldes:versionOfPath brol:doare ;
+  ldes:immutable 'false'^^xsd:boolean ;
+  ldes:pollingInterval '3600'^^xsd:integer ;
+  tree:shape [
+    a sh:NodeShape ;
+    sh:nodeKind sh:IRI ;
+    sh:property [
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:path brol:doare
+    ],
+    [
+      sh:datatype xsd:dateTime ;
+      sh:minCount 1 ;
+      sh:path brol:hiere
+    ],
+    [
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:path skos:altLabel
+    ],
+    [
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:path skos:prefLabel
+    ],
+    [
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:path skos:definition
+    ],
+    [
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:path skos:notation
+    ];
+    sh:targetClass skos:Concept
+  ] ;
+  tree:view <> ;
+  .
+
+<feed> tree:member <http://vocab.nerc.ac.uk/collection/P02/current/MDBO/4/> .
+<http://vocab.nerc.ac.uk/collection/P02/current/MDBO/4/>
+    a skos:Concept ;
+    brol:doare <http://vocab.nerc.ac.uk/collection/P02/current/MDBO/>;
+    brol:hiere '2023-06-01T10:56:10'^^xsd:dateTime ;
+    skos:altLabel 'Metoid_Biota'^^xsd:string ;
+    skos:prefLabel 'Trace metalloid and inorganic selenium concentrations in biota'^^xsd:string ;
+    skos:definition 'Concentration parameters for trace metalloid elements and inorganic selenium species in either whole organisms or their constituent parts. Trace metalloids are considered as B, Ge, As, Sb, Te, and Po (but not Si which is classed separately because of its major role in environmental chemistry).'^^xsd:string ;
+    skos:notation 'SDN:P02::MDBO'^^xsd:string .
+
+<feed> tree:member <http://vocab.nerc.ac.uk/collection/P02/current/PXSD/2/> .
+<http://vocab.nerc.ac.uk/collection/P02/current/PXSD/2/>
+    a skos:Concept ;
+    brol:doare <http://vocab.nerc.ac.uk/collection/P02/current/PXSD/>;
+    brol:hiere '2023-04-21T11:55:38'^^xsd:dateTime ;
+    skos:altLabel 'Sed_Phosphorus'^^xsd:string ;
+    skos:prefLabel 'Phosphorus concentrations in sediment'^^xsd:string ;
+    skos:definition 'Concentrations of total, organic and inorganic phosphorus per unit weight of sediment.  Sediment is understood to be the solid phase of the bed, including the recently settled material sometimes known as fluff collected from the bed surface.'^^xsd:string ;
+    skos:notation 'SDN:P02::PXSD'^^xsd:string .
