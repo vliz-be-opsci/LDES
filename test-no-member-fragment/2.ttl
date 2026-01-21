@@ -1,0 +1,69 @@
+
+@prefix tree: <https://w3id.org/tree#> .
+@prefix ldes: <https://w3id.org/ldes#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix brol: <https://example.org/brol#> .
+
+@base <https://open-science.vliz.be/LDES/test-no-member-fragment/2.ttl> .
+
+<>
+    a tree:Node ;
+
+    tree:relation [
+      a tree:LessThanRelation ;
+      tree:node <https://open-science.vliz.be/LDES/test-no-member-fragment/3.ttl> ;
+      tree:path dc:modified ;
+      tree:value '2022-12-31T00:00:00+00:00'^^xsd:dateTime
+    ] ;
+    
+    ldes:retentionPolicy [
+        a ldes:RetentionPolicy ;
+        ldes:versionAmount 100
+    ] .
+
+<feed>
+  a ldes:EventStream ;
+  ldes:timestampPath brol:hiere ;
+  ldes:versionOfPath brol:doare ;
+  ldes:immutable 'false'^^xsd:boolean ;
+  ldes:pollingInterval '3600'^^xsd:integer ;
+  tree:shape [
+    a sh:NodeShape ;
+    sh:nodeKind sh:IRI ;
+    sh:property [
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:path brol:doare
+    ],
+    [
+      sh:datatype xsd:dateTime ;
+      sh:minCount 1 ;
+      sh:path brol:hiere
+    ],
+    [
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:path skos:altLabel
+    ],
+    [
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:path skos:prefLabel
+    ],
+    [
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:path skos:definition
+    ],
+    [
+      sh:datatype xsd:string ;
+      sh:minCount 1 ;
+      sh:path skos:notation
+    ];
+    sh:targetClass skos:Concept
+  ] ;
+  tree:view <> ;
+  .
